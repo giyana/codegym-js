@@ -16,7 +16,10 @@ document.addEventListener("DOMContentLoaded", function () {
     //APIへの問い合わせ～HTML反映まで
     let getAPI = function () {
         //APIへの問い合わせURLを生成
-        let url = "http://api.openweathermap.org/data/2.5/weather?q=" + getSelectValue("city") + "&APPID=4b5774e9f3d2a07b84f0f2f88e486224";
+        const cityName = getSelectValue("city");
+        const appId = "4b5774e9f3d2a07b84f0f2f88e486224";
+        let url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${appId}`;
+        
         //天気情報を取得＆HTMLに反映
         let xhr = new XMLHttpRequest();
         xhr.open("GET", url, true);
@@ -80,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let city_en = document.getElementById("city")
             let city_index = city_en.selectedIndex
             let city_jp = city_en.options[city_index].text;
-            
+
             //取得した町名・天気をHTMLに反映
             let result_weather = document.getElementById("result");
             result_weather.textContent = `${city_jp}の天気は${weather_jp}です。`;
