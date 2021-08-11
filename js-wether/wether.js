@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     //指定されたプルダウンの値を取得
-    let getSelectValue = function (name) {
+    const getSelectValue = function (name) {
         let result = "";
-        let elems = document.getElementById(name).options;
+        const elems = document.getElementById(name).options;
         for (let i = 0, len = elems.length; i < len; i++) {
-            let elem = elems.item(i);
+            const elem = elems.item(i);
             if (elem.selected) {
                 result = elem.value;
                 break;
@@ -14,19 +14,19 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     //APIへの問い合わせ～HTML反映まで
-    let getAPI = function () {
+    const getAPI = function () {
         //APIへの問い合わせURLを生成
         const cityName = getSelectValue("city");
         const appId = "4b5774e9f3d2a07b84f0f2f88e486224";
-        let url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${appId}`;
+        const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${appId}`;
 
         //天気情報を取得＆HTMLに反映
-        let xhr = new XMLHttpRequest();
+        const xhr = new XMLHttpRequest();
         xhr.open("GET", url, true);
         xhr.onload = function () {
-            let dataJson = this.response;
-            let data = JSON.parse(dataJson);
-            let weatherEn = data.weather[0].main;
+            const dataJson = this.response;
+            const data = JSON.parse(dataJson);
+            const weatherEn = data.weather[0].main;
 
             //天候状況を日本語に翻訳（公式ドキュメントの全天候網羅済）
             switch (weatherEn) {
@@ -80,12 +80,12 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             //HTML上のプルダウンの町名取得
-            let cityEn = document.getElementById("city")
-            let cityIndex = cityEn.selectedIndex
-            let cityJp = cityEn.options[cityIndex].text;
+            const cityEn = document.getElementById("city")
+            const cityIndex = cityEn.selectedIndex
+            const cityJp = cityEn.options[cityIndex].text;
 
             //取得した町名・天気をHTMLに反映
-            let resultWeather = document.getElementById("result");
+            const resultWeather = document.getElementById("result");
             resultWeather.textContent = `${cityJp}の天気は${weatherJp}です。`;
         };
         xhr.send();
