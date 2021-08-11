@@ -1,22 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     //指定されたプルダウンの値を取得
-    const getSelectValue = function (name) {
-        let result = "";
-        const elems = document.getElementById(name).options;
-        for (let i = 0, len = elems.length; i < len; i++) {
-            const elem = elems.item(i);
-            if (elem.selected) {
-                result = elem.value;
-                break;
-            }
-        }
-        return result;
-    };
+    const cityName = document.querySelector("#city").value
 
     //APIへの問い合わせ～HTML反映まで
     const getAPI = function () {
         //APIへの問い合わせURLを生成
-        const cityName = getSelectValue("city");
         const appId = "4b5774e9f3d2a07b84f0f2f88e486224";
         const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${appId}`;
 
