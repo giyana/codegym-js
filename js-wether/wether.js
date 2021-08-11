@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let city_en = document.getElementById("city")
             let city_index = city_en.selectedIndex
             let city_jp = city_en.options[city_index].text;
-
+            
             //取得した町名・天気をHTMLに反映
             let result_weather = document.getElementById("result");
             result_weather.textContent = `${city_jp}の天気は${weather_jp}です。`;
