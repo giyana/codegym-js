@@ -4,12 +4,19 @@ document.addEventListener("DOMContentLoaded", function () {
         const xhr = new XMLHttpRequest();
         const url = getWeatherApiUrl();
         xhr.open("GET", url, true);
-        xhr.onload = function () {
-            const dataJson = this.response;
-            const data = JSON.parse(dataJson);
-            const weatherNameEn = data.weather[0].main;
-            const weatherText = sharpData(weatherNameEn);
-            editHtml(weatherText);
+        xhr.onload = function (e) {
+            if (xhr.status === 200) {
+                const dataJson = this.response;
+                const data = JSON.parse(dataJson);
+                const weatherNameEn = data.weather[0].main;
+                const weatherText = sharpData(weatherNameEn);
+                editHtml(weatherText);
+            } else {
+                console.error(xhr.statusText);
+            };
+        };
+        xhr.onerror = function () {
+            console.error(xhr.statusText);
         };
         xhr.send();
     };
