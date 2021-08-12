@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const xhr = new XMLHttpRequest();
         const url = getWeatherApiUrl();
         xhr.open("GET", url, true);
-        xhr.onload = function (e) {
+        xhr.onload = function () {
             if (xhr.status === 200) {
                 const dataJson = this.response;
                 const data = JSON.parse(dataJson);
