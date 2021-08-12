@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    //API取得~HTML編集までの一連の動き
+    //API取得~HTML書込まで一連の動作
     const wholeOparation = function () {
         const xhr = new XMLHttpRequest();
         const url = getWeatherApi();
@@ -28,7 +28,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const sharpData = function (weatherEn) {
         //日本語の天候を取得
         const weatherTrans = {
-            "Clouds": "曇り", "Clear": "晴天", "Snow": "雪", "Rain": "雨", "Tornado": "竜巻", "Squall": "スコール", "Thunderstorm": "雷雨", "Drizzle": "霧雨", "Mist": "霧", "Smoke": "煙っぽい", "Haze": "煙霧", "Fog": "濃霧", "Ash": "降灰", "Dust": "砂塵", "Sand": "砂っぽい", "": "不明"
+            "Clouds": "曇り",
+            "Clear": "晴天",
+            "Snow": "雪",
+            "Rain": "雨",
+            "Tornado": "竜巻",
+            "Squall": "スコール",
+            "Thunderstorm": "雷雨",
+            "Drizzle": "霧雨",
+            "Mist": "霧",
+            "Smoke": "煙っぽい",
+            "Haze": "煙霧",
+            "Fog": "濃霧",
+            "Ash": "降灰",
+            "Dust": "砂塵",
+            "Sand": "砂っぽい",
+            "": "不明"
         };
         const weatherJp = weatherTrans[weatherEn];
         //日本語の町名取得
