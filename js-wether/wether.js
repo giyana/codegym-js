@@ -1,21 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
     //API取得~HTML書込まで一連の動作
-    const wholeOparation = function () {
+    const mainExecute = function () {
         const xhr = new XMLHttpRequest();
-        const url = getWeatherApi();
+        const url = getWeatherApiUrl();
         xhr.open("GET", url, true);
         xhr.onload = function () {
             const dataJson = this.response;
             const data = JSON.parse(dataJson);
-            const weatherEn = data.weather[0].main;
-            const weatherText = sharpData(weatherEn);
+            const weatherNameEn = data.weather[0].main;
+            const weatherText = sharpData(weatherNameEn);
             editHtml(weatherText);
         };
         xhr.send();
     };
 
-    //APIへの問い合わせ
-    const getWeatherApi = function () {
+    //APIへの問い合わせエンドポイント
+    const getWeatherApiUrl = function () {
         //指定されたプルダウンの値を取得
         const cityName = document.querySelector("#city").value;
         //APIへの問い合わせURLを生成
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     //日本語の天候・町名を取得（公式ドキュメントの全天候網羅済）
-    const sharpData = function (weatherEn) {
+    const sharpData = function (weatherNameEn) {
         //日本語の天候を取得
         const weatherTrans = {
             "Clouds": "曇り",
@@ -45,12 +45,12 @@ document.addEventListener("DOMContentLoaded", function () {
             "Sand": "砂っぽい",
             "": "不明"
         };
-        const weatherJp = weatherTrans[weatherEn];
+        const weatherNameJp = weatherTrans[weatherNameEn];
         //日本語の町名取得
-        const cityEn = document.getElementById("city")
-        const cityIndex = cityEn.selectedIndex
-        const cityJp = cityEn.options[cityIndex].text;
-        return `${cityJp}の天気は${weatherJp}です。`;
+        const citySelectElement = document.getElementById("city")
+        const cityIndex = citySelectElement.selectedIndex
+        const cityNameJp = citySelectElement.options[cityIndex].text;
+        return `${cityNameJp}の天気は${weatherNameJp}です。`;
     };
 
     //取得した町名・天気をHTMLに反映
@@ -60,8 +60,8 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     //初回レンダリング時
-    wholeOparation();
+    mainExecute();
 
     //プルダウンを切り替え時
-    document.getElementById("city").onchange = function () { wholeOparation() };
+    document.getElementById("city").onchange = function () { mainExecute() };
 });
